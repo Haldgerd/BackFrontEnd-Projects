@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "express": "^4.17.1",
     "node": "^17.1.0"
-  }
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend sever for movie application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lorna",
+  "license": "ISC"
 }
