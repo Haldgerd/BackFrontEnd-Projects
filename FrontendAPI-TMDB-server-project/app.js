@@ -7,7 +7,9 @@ const __dirname = path.resolve();
 
 
 // make static files avaliable. Static files are usualy stored in public dir.
-app.use()
+//anwser: https://stackoverflow.com/questions/40728554/resource-blocked-due-to-mime-type-mismatch-x-content-type-options-nosniff
+// answer with 10 upvotes did the trick.
+app.use(express.static(`${__dirname}/public/`));
 
 // make a request to server, which will in turn respond
 app.get("/", (req, res) => {
