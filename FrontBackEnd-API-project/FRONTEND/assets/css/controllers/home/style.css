@@ -1,0 +1,103 @@
+nav, main .movie__card .movie__container, main .movie__card, main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* general styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f22133;
+  color: white;
+}
+
+main {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 2em;
+}
+main h2 {
+  font-size: 1rem;
+  color: #012825;
+  text-transform: capitalize;
+}
+main .movie__card {
+  flex-flow: column;
+  justify-content: flex-start;
+  background-color: #d9d9d9;
+  color: white;
+  height: 380px;
+  width: 200px;
+  margin-top: 2.85em;
+  margin-left: 2.85em;
+  position: relative;
+  overflow: hidden;
+  font-size: 0.95rem;
+  transition: 0.3s ease-in;
+  /* select all movie cards and apply margin except the last child in the group of siblings. */
+}
+main .movie__card .movie__info {
+  padding: 0.75em;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #751f26;
+  z-index: 5;
+  transition: 0.3s ease-in;
+  overflow-y: auto;
+}
+main .movie__card .movie__container {
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+main .movie__card .movie__image {
+  background-color: white;
+}
+main .movie__card:hover .movie__info {
+  bottom: 0;
+  transition: 0.3s ease-in;
+}
+
+span {
+  background-color: #012825;
+  color: white;
+  padding: 0.2em;
+  margin-top: 0.3em;
+  font-size: 0.75rem;
+}
+
+nav {
+  justify-content: space-between;
+  background-color: #012825;
+  color: white;
+  text-align: right;
+}
+nav .logo {
+  width: clamp(170px, 20vw, 400px);
+}
+nav form {
+  padding: 1em;
+  width: 100%;
+}
+nav input {
+  padding: 0.75em;
+  border-radius: 20px;
+  border: none;
+  width: min(75%, 300px);
+}
+nav input:focus {
+  outline: none;
+  outline: 3px solid #f00518;
+}
+
+/*# sourceMappingURL=style.css.map */
