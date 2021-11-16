@@ -3,7 +3,8 @@ import express from "express";
 import path from "path";
 //import fetch as it's not defined in node.js environment
 import fetch from "node-fetch";
-import { LOADIPHLPAPI } from "dns";
+import { rsort } from "semver";
+import cors from "cors";
 
 
 //VARIABLES
@@ -13,6 +14,7 @@ const IMAGE = "https://image.tmdb.org/t/p/w500/";
 const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
 const networkID = "213";
 const URL = "https://api.themoviedb.org/3/discover/tv?";
+const keywords = "with_keywords";
 
 
 //without path __dirname will not be recongized. Still exploring why this is so. Either connected to node version? Or it produced an error due to smthng else => https://stackoverflow.com/questions/8817423/why-is-dirname-not-defined-in-node-repl
@@ -23,6 +25,9 @@ const URL = "https://api.themoviedb.org/3/discover/tv?";
 // answer with 10 upvotes did the trick.
 // app.use(express.static(`${__dirname}/public/`));
 
+
+//fixes problem with cors: Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:3000/. (Reason: CORS request did not succeed).
+app.use(cors());
 
 
 // respond with series data
@@ -36,7 +41,15 @@ app.get("/", (req, res) => {
 
   //   }
   //}
-  const result = getSeries(URL);
+
+  //resolving a promise, gathering json data from API
+  getSeries(URL)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log(error.name, error.message);
+    });
 
 });
 
@@ -57,18 +70,19 @@ app.listen(PORT, () => console.log("LISTENING.."));
   //fetching data and sending it.
 const getSeries = async (url) => {
     
-  const results = await fetch(url + `sort_by=popularity.desc&network_id=${networkID}&api_key=${APIkey}`);
+  const response = await fetch(url + `sort_by=popularity.desc&network_id=${networkID}&api_key=${APIkey}`);
 
-  const data = await results.json();
+  if (response.status !== 200) {
+    throw new Error("Cannot fetch requested data!");
+  } 
+
+  const data = await response.json();
 
   const dataResults = await data.results;
 
-  const keywords = "with_keywords";
-
-
   const finalData = getTitleRatingDescription(dataResults);
 
-  return finalData;
+  return finalData; //returns a promise
 
 }
 
@@ -100,7 +114,7 @@ const getTitleRatingDescription = (data) => {
 
 }
 
-
+//this works in console but not in res, req of app.get
 // const result = getSeries(URL);
 
 // result.then(() => console.log(result)).catch((error) => console.log(error.name, error,message));

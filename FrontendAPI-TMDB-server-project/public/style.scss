@@ -1,7 +1,7 @@
 //variables
 
 $color-primary-SkyBlack: hsl(222, 10%, 20%);
-$color-primary-dirty-white: hsl(0, 0%, 95%);
+$color-primary-dirtyWhite: hsl(0, 0%, 95%);
 $color-primary-cherryRed: hsl(348, 99%, 28%);
 $color-primary-raspberryRed: hsl(349, 99%, 42%);
 $color-primary-lightRed: hsl(355, 96%, 43%) ;
@@ -20,9 +20,18 @@ body {
   background-color: $color-primary-SkyBlack;
 }
 
+h3 {
+  width: 15ch;
+  font-size: 1rem;
+}
+
+span {
+  font-weight: bold;
+}
+
 nav {
   padding: 0 2em 0 0;
-  background-color: $color-primary-dirty-white;
+  background-color: $color-primary-dirtyWhite;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,32 +63,39 @@ main {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    width: 200px;
-    height: 350px;
-    background-color: $color-primary-dirty-white;
+    width: 210px;
+    height: 360px;
+    background-color: $color-primary-dirtyWhite;
     margin-bottom: 2.5em;
     margin-left: 2.5em;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 
     .series__overview {
+      font-size: .95rem;
+      padding: 0.5em;
       position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 0;
+      bottom: -100%;
+      height: 100%;
       width: 100%;
       background-color: $color-primary-raspberryRed;
       transition: .3s linear;
+      overflow: hidden;
+      overflow-y: auto;
     }
 
 
     .series__img {
-      height: 280px;
+      height: 310px;
       background-size: cover;
     }
 
 
     .series__information {
+      display: flex;
+      justify-content: space-between;
+      padding: .3em;
       height: 70px;
       background-color: $color-primary-lightRed;
     }
@@ -88,7 +104,7 @@ main {
   }
 
   .series__container:hover .series__overview{
-    height: 100%;
+    bottom: 0;
     transition: .3s linear;
   }
 
