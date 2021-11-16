@@ -37,11 +37,37 @@ main {
   padding: 3em 1em;
 }
 main .series__container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   width: 200px;
   height: 350px;
   background-color: #f2f2f2;
   margin-bottom: 2.5em;
   margin-left: 2.5em;
+  position: relative;
+  cursor: pointer;
+}
+main .series__container .series__overview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  background-color: #d50128;
+  transition: 0.3s linear;
+}
+main .series__container .series__img {
+  height: 280px;
+  background-size: cover;
+}
+main .series__container .series__information {
+  height: 70px;
+  background-color: #d70416;
+}
+main .series__container:hover .series__overview {
+  height: 100%;
+  transition: 0.3s linear;
 }
 
 /*# sourceMappingURL=style.css.map */
