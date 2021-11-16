@@ -1,8 +1,61 @@
 //variables
 
 $color-primary-SkyBlack: hsl(222, 10%, 20%);
+$color-primary-dirty-white: hsl(0, 0%, 95%);
+$color-primary-cherryRed: hsl(348, 99%, 28%);
+$color-primary-raspberryRed: hsl(349, 99%, 42%);
+$color-primary-lightRed: hsl(355, 96%, 43%) ;
 
+
+/* general styles */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: $color-primary-SkyBlack;
+}
+
+nav {
+  padding: 0 2em 0 0;
+  background-color: $color-primary-dirty-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    width: clamp(150px, 10vw, 300px);
+  }
+
+  input[type="text"] {
+    padding: 0.5em;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border: 3px solid $color-primary-raspberryRed;
+  }
+
+}
+
+main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 3em 1em;
+
+
+  .series__container { 
+    width: 200px;
+    height: 350px;
+    background-color: $color-primary-dirty-white;
+    margin-bottom: 2.5em;
+    margin-left: 2.5em;
+  }
+
 }
