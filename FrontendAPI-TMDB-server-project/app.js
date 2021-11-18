@@ -5,6 +5,7 @@ import path from "path";
 import fetch from "node-fetch";
 import cors from "cors";
 import bodyParser from "body-parser";  // seems to be deprecated? LOOK for alternative solution.
+//FOUND! https://stackoverflow.com/questions/47232187/express-json-vs-bodyparser-json/47232318
 
 
 //VARIABLES
@@ -12,7 +13,7 @@ const PORT = 3000;
 
 const app = express();
 
-const APIkey = "";
+const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
 
 const networkID = 213;
 
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
   //}
 
   //resolving a promise, gathering json data from API
+  
   getSeries(URL, APIQuery)
     .then((data) => {
       res.json(data);
@@ -66,29 +68,30 @@ app.get("/", (req, res) => {
 
 
 //at search address console lof user form input. Gathering form data in backend.
-app.post("/search", (req, res) => {
+app.post("/", (req, res) => {
 
   //we need to use .body to be able to parse through html
   const userQuery = req.body.query;
-
+  
   const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&query=${userQuery}`;
 
-
   console.log(userQuery);
+
+
+  //works! displays data in json browser but on localhost:3000 ???
+  getSeries(URL, APISearchQuery) 
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log(error.name, error.message);
+    });
+
 });
 
 
 // app.get("/search", (req, res) => {
-
-//   getSeries(URL, APISearchQuery)
-//   .then((data) => {
-//     res.json(data);
-//   })
-//   .catch((error) => {
-//     console.log(error.name, error.message);
-//   });
-
-//   console.log("PROBLEM");
+//   res.json("Hello.")  //this works in browser
 
 // });
 

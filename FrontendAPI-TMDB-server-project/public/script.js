@@ -1,8 +1,7 @@
 
 //VARIABLES
-const serverURL = "http://localhost:3000/";
+const serverURL = "http://localhost:3000";
 
-const searchDataURL = "https://localhost:3000/search";
 
 const IMAGE = "https://image.tmdb.org/t/p/w200";
 
@@ -54,12 +53,21 @@ const getData = async (url) => {
 
 // listening for sumbit => asking for data from backend using search Value as query string.
 window.addEventListener("submit", () => {
+  
+  getData(serverURL)
+    .then((data) => {
+      console.log(data);
+    })
+    .then(() => console.log("I'm still here"))
+    .catch((error) => {
+      console.log(`There was an error ${error.message}!`);
+    });
 
 });
 
 
 
-
+// display fetched data in browser.
 getData(serverURL)
   .then((data) => displaySeries(data))
 
