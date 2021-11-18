@@ -11,8 +11,9 @@ import cors from "cors";
 const PORT = 3000;
 const app = express();
 const IMAGE = "https://image.tmdb.org/t/p/w500/";
+//fake key
 const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
-const networkID = "213";
+const networkID = 213;
 const URL = "https://api.themoviedb.org/3/discover/tv?";
 const keywords = "with_keywords";
 
@@ -70,7 +71,7 @@ app.listen(PORT, () => console.log("LISTENING.."));
   //fetching data and sending it.
 const getSeries = async (url) => {
     
-  const response = await fetch(url + `sort_by=popularity.desc&network_id=${networkID}&api_key=${APIkey}`);
+  const response = await fetch(url + `sort_by=popularity.desc&with_networks=${networkID}&api_key=${APIkey}`);
 
   if (response.status !== 200) {
     throw new Error("Cannot fetch requested data!");

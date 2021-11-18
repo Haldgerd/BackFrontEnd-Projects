@@ -1,10 +1,21 @@
 //variables
 
+//font face for fonts
+@font-face {
+  font-family: 'netflix_fonts';
+  src: url('./fonts/bebas-neue-webfont.woff2') format('woff2'),
+       url('./fonts/bebas-neue-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 $color-primary-SkyBlack: hsl(222, 10%, 20%);
 $color-primary-dirtyWhite: hsl(0, 0%, 95%);
 $color-primary-cherryRed: hsl(348, 99%, 28%);
 $color-primary-raspberryRed: hsl(349, 99%, 42%);
 $color-primary-lightRed: hsl(355, 96%, 43%) ;
+$ff-primary: "netflix_fonts";
 
 
 /* general styles */
@@ -18,15 +29,28 @@ $color-primary-lightRed: hsl(355, 96%, 43%) ;
 
 body {
   background-color: $color-primary-SkyBlack;
+  font-family: $ff-primary;
 }
 
 h3 {
   width: 15ch;
-  font-size: 1rem;
+  font-size: 1.35rem;
 }
 
 span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  background-color: $color-primary-raspberryRed;
   font-weight: bold;
+  font-size: 1.1rem;
+  color: $color-primary-dirtyWhite;
+  position: absolute;
+  right: 5px;
+  top: -20px;
 }
 
 nav {
@@ -59,7 +83,8 @@ main {
   padding: 3em 1em;
 
 
-  .series__container { 
+  .series__container {
+    border-radius: 5px;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
@@ -73,7 +98,8 @@ main {
     overflow: hidden;
 
     .series__overview {
-      font-size: .95rem;
+      font-size: 1.15rem;
+      color: $color-primary-dirtyWhite;
       padding: 0.5em;
       position: absolute;
       bottom: -100%;
@@ -87,7 +113,7 @@ main {
 
 
     .series__img {
-      height: 310px;
+      height: 330px;
       background-size: cover;
     }
 
@@ -97,7 +123,7 @@ main {
       justify-content: space-between;
       padding: .3em;
       height: 70px;
-      background-color: $color-primary-lightRed;
+      position: relative;
     }
 
 

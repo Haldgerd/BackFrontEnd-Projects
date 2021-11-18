@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "netflix_fonts";
+  src: url("./fonts/bebas-neue-webfont.woff2") format("woff2"), url("./fonts/bebas-neue-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 /* general styles */
 *,
 *::after,
@@ -9,15 +15,28 @@
 
 body {
   background-color: #2e3138;
+  font-family: "netflix_fonts";
 }
 
 h3 {
   width: 15ch;
-  font-size: 1rem;
+  font-size: 1.35rem;
 }
 
 span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  background-color: #d50128;
   font-weight: bold;
+  font-size: 1.1rem;
+  color: #f2f2f2;
+  position: absolute;
+  right: 5px;
+  top: -20px;
 }
 
 nav {
@@ -46,6 +65,7 @@ main {
   padding: 3em 1em;
 }
 main .series__container {
+  border-radius: 5px;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -59,7 +79,8 @@ main .series__container {
   overflow: hidden;
 }
 main .series__container .series__overview {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
+  color: #f2f2f2;
   padding: 0.5em;
   position: absolute;
   bottom: -100%;
@@ -71,7 +92,7 @@ main .series__container .series__overview {
   overflow-y: auto;
 }
 main .series__container .series__img {
-  height: 310px;
+  height: 330px;
   background-size: cover;
 }
 main .series__container .series__information {
@@ -79,7 +100,7 @@ main .series__container .series__information {
   justify-content: space-between;
   padding: 0.3em;
   height: 70px;
-  background-color: #d70416;
+  position: relative;
 }
 main .series__container:hover .series__overview {
   bottom: 0;
