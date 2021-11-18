@@ -3,7 +3,6 @@ import express from "express";
 import path from "path";
 //import fetch as it's not defined in node.js environment
 import fetch from "node-fetch";
-import { rsort } from "semver";
 import cors from "cors";
 
 
@@ -12,10 +11,12 @@ const PORT = 3000;
 const app = express();
 const IMAGE = "https://image.tmdb.org/t/p/w500/";
 //fake key
-const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
+const APIkey = "";
 const networkID = 213;
-const URL = "https://api.themoviedb.org/3/discover/tv?";
+const URL = "https://api.themoviedb.org/3/";
 const keywords = "with_keywords";
+const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${APIkey}`;
+const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&query=${user_query}`;
 
 
 //without path __dirname will not be recongized. Still exploring why this is so. Either connected to node version? Or it produced an error due to smthng else => https://stackoverflow.com/questions/8817423/why-is-dirname-not-defined-in-node-repl
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
   //}
 
   //resolving a promise, gathering json data from API
-  getSeries(URL)
+  getSeries(URL, APIQuery)
     .then((data) => {
       res.json(data);
     })
@@ -69,9 +70,9 @@ app.listen(PORT, () => console.log("LISTENING.."));
 
 //FUNCTIONS
   //fetching data and sending it.
-const getSeries = async (url) => {
+const getSeries = async (url, query) => {
     
-  const response = await fetch(url + `sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${APIkey}`);
+  const response = await fetch(url + query);
 
   if (response.status !== 200) {
     throw new Error("Cannot fetch requested data!");
@@ -114,9 +115,3 @@ const getTitleRatingDescription = (data) => {
   return series;
 
 }
-
-//this works in console but not in res, req of app.get
-// const result = getSeries(URL);
-
-// result.then(() => console.log(result)).catch((error) => console.log(error.name, error,message));
-

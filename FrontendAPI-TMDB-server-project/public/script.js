@@ -1,7 +1,7 @@
 
 //VARIABLES
 const serverURL = "http://localhost:3000/";
-const searchData = "";
+const searchDataURL = "https://localhost:3000/search";
 const IMAGE = "https://image.tmdb.org/t/p/w200";
 const mainContainer = document.querySelector("main");
 const search = document.querySelector("input[type=text]");
@@ -24,7 +24,7 @@ const displaySeries = (data) => {
       <img src="${IMAGE}${element.poster}" alt="Series official poster" class="series__img" />
       <div class="series__information">
         <h3 class="series__title">${element.title}</h3>
-        <span class="rating">${element.rating}</span>
+        <span class="rating">${element.rating * 10}%</span>
       </div>
       <div class="series__overview">OVERVIEW:<br><br>${element.description}</div> `;
 
@@ -56,6 +56,10 @@ window.addEventListener("submit", (e) => {
 
   console.log(searchValue);
   
+  getData(searchDataURL)
+    .then((data) => displaySeries(data))
+    .catch((error) => console.log(error.name, error.message));
+
   // setTimeout(() => {
   //   search.value = "";
   // }, 2000)

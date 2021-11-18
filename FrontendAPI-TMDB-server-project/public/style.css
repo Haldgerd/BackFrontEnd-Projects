@@ -20,7 +20,7 @@ body {
 
 h3 {
   width: 15ch;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
 }
 
 span {
@@ -69,7 +69,7 @@ main .series__container {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  width: 210px;
+  width: 200px;
   height: 360px;
   background-color: #f2f2f2;
   margin-bottom: 2.5em;
