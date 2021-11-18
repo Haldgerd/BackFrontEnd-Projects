@@ -71,7 +71,7 @@ app.listen(PORT, () => console.log("LISTENING.."));
   //fetching data and sending it.
 const getSeries = async (url) => {
     
-  const response = await fetch(url + `sort_by=popularity.desc&with_networks=${networkID}&api_key=${APIkey}`);
+  const response = await fetch(url + `sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${APIkey}`);
 
   if (response.status !== 200) {
     throw new Error("Cannot fetch requested data!");
