@@ -4,19 +4,22 @@ import path from "path";
 //import fetch as it's not defined in node.js environment
 import fetch from "node-fetch";
 import cors from "cors";
+import bodyParser from "body-parser";  // seems to be deprecated? LOOK for alternative solution.
 
 
 //VARIABLES
 const PORT = 3000;
+
 const app = express();
-const IMAGE = "https://image.tmdb.org/t/p/w500/";
-//fake key
+
 const APIkey = "";
+
 const networkID = 213;
+
 const URL = "https://api.themoviedb.org/3/";
-const keywords = "with_keywords";
+
 const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${APIkey}`;
-const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&query=${user_query}`;
+
 
 
 //without path __dirname will not be recongized. Still exploring why this is so. Either connected to node version? Or it produced an error due to smthng else => https://stackoverflow.com/questions/8817423/why-is-dirname-not-defined-in-node-repl
@@ -30,6 +33,12 @@ const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&q
 
 //fixes problem with cors: Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:3000/. (Reason: CORS request did not succeed).
 app.use(cors());
+
+//https://dev.to/gbudjeakp/how-to-connect-your-client-side-to-your-server-side-using-node-and-express-2i71
+//https://stackoverflow.com/questions/47232187/express-json-vs-bodyparser-json/47232318
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true}));
 
 
 // respond with series data
@@ -56,12 +65,32 @@ app.get("/", (req, res) => {
 });
 
 
-//at search address
-app.get("/search", (req, res) => {
+//at search address console lof user form input. Gathering form data in backend.
+app.post("/search", (req, res) => {
 
-  res.json("This is a search page.");
+  //we need to use .body to be able to parse through html
+  const userQuery = req.body.query;
 
+  const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&query=${userQuery}`;
+
+
+  console.log(userQuery);
 });
+
+
+// app.get("/search", (req, res) => {
+
+//   getSeries(URL, APISearchQuery)
+//   .then((data) => {
+//     res.json(data);
+//   })
+//   .catch((error) => {
+//     console.log(error.name, error.message);
+//   });
+
+//   console.log("PROBLEM");
+
+// });
 
 
 app.listen(PORT, () => console.log("LISTENING.."));
@@ -72,9 +101,10 @@ app.listen(PORT, () => console.log("LISTENING.."));
   //fetching data and sending it.
 const getSeries = async (url, query) => {
     
-  const response = await fetch(url + query);
+  const response = await fetch(`${url}${query}`);
 
   if (response.status !== 200) {
+    console.log(response.status);
     throw new Error("Cannot fetch requested data!");
   } 
 
@@ -84,7 +114,7 @@ const getSeries = async (url, query) => {
 
   const finalData = getTitleRatingDescription(dataResults);
 
-  return finalData; //returns a promise
+  return finalData; //returns a promise that needs to be resolved in .then handler.
 
 }
 

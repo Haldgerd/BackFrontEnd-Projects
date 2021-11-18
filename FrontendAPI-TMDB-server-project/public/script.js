@@ -1,10 +1,15 @@
 
 //VARIABLES
 const serverURL = "http://localhost:3000/";
+
 const searchDataURL = "https://localhost:3000/search";
+
 const IMAGE = "https://image.tmdb.org/t/p/w200";
+
 const mainContainer = document.querySelector("main");
+
 const search = document.querySelector("input[type=text]");
+
 
 
 //on reload page clear the value set in input field.
@@ -48,23 +53,7 @@ const getData = async (url) => {
 
 
 // listening for sumbit => asking for data from backend using search Value as query string.
-window.addEventListener("submit", (e) => {
-  
-  e.preventDefault();
-
-  const searchValue = search.value; 
-
-  console.log(searchValue);
-  
-  getData(searchDataURL)
-    .then((data) => displaySeries(data))
-    .catch((error) => console.log(error.name, error.message));
-
-  // setTimeout(() => {
-  //   search.value = "";
-  // }, 2000)
-
-  //get data from other side. :) backend I mean.
+window.addEventListener("submit", () => {
 
 });
 
