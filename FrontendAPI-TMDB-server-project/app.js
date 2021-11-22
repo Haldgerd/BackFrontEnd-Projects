@@ -13,7 +13,7 @@ const PORT = 3000;
 
 const app = express();
 
-const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
+const APIkey = "";
 
 const networkID = 213;
 
