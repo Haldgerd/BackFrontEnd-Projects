@@ -36,7 +36,7 @@ const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_n
 // app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5500",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
   })
@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
   //     console.log(`${err.name}: ${err.message}`);
   //     res.end(err.messgage);
 
-  //   }
+  //   
   //}
 
   //resolving a promise, gathering json data from API
