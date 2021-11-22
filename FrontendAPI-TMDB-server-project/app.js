@@ -13,7 +13,7 @@ const PORT = 3000;
 
 const app = express();
 
-const APIkey = "";
+const APIkey = "ad3ffbd0b196e926f7cccabfd2460f2a";
 
 const networkID = 213;
 
@@ -33,13 +33,14 @@ const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_n
 
 
 //fixes problem with cors: Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:3000/. (Reason: CORS request did not succeed).
-app.use(cors());
-
-//https://dev.to/gbudjeakp/how-to-connect-your-client-side-to-your-server-side-using-node-and-express-2i71
-//https://stackoverflow.com/questions/47232187/express-json-vs-bodyparser-json/47232318
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: true}));
+// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true
+  })
+)
 
 
 // respond with series data
@@ -67,6 +68,12 @@ app.get("/", (req, res) => {
 });
 
 
+//https://dev.to/gbudjeakp/how-to-connect-your-client-side-to-your-server-side-using-node-and-express-2i71
+//https://stackoverflow.com/questions/47232187/express-json-vs-bodyparser-json/47232318
+app.use(express.json()); //middle-wear to allow access to DOM elements
+app.use(express.urlencoded({
+    extended: true}));
+
 //at search address console lof user form input. Gathering form data in backend.
 app.post("/", (req, res) => {
 
@@ -81,11 +88,13 @@ app.post("/", (req, res) => {
   //works! displays data in json browser but on localhost:3000 ???
   getSeries(URL, APISearchQuery) 
     .then((data) => {
-      res.json(data);
+      res.redirect(JSON.parse(data));
+     
     })
     .catch((error) => {
       console.log(error.name, error.message);
     });
+
 
 });
 

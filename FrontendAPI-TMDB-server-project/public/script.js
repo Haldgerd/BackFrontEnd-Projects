@@ -11,6 +11,7 @@ const search = document.querySelector("input[type=text]");
 
 
 
+
 //on reload page clear the value set in input field.
 search.value = "";
 
@@ -53,15 +54,23 @@ const getData = async (url) => {
 
 // listening for sumbit => asking for data from backend using search Value as query string.
 window.addEventListener("submit", () => {
-  
-  getData(serverURL)
-    .then((data) => {
-      console.log(data);
-    })
-    .then(() => console.log("I'm still here"))
-    .catch((error) => {
-      console.log(`There was an error ${error.message}!`);
-    });
+
+  const retrieveData = async (url) => {
+
+    const searchSeries = await fetch(url);
+
+    const response = await searchSeries.json();
+
+    return response;
+
+  }
+
+
+  retrieveData(serverURL)
+    .then((response) => response.json())
+    .then(() => console.log("IS IT WORKING?"))
+    .catch((error) => console.log(`Crap ${error.message} occured ${error.name}`))
+
 
 });
 
