@@ -18,6 +18,7 @@
   "author": "Lorna Mally",
   "license": "ISC",
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.15"
   }
 }

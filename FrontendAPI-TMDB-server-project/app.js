@@ -7,19 +7,22 @@ import cors from "cors";
 import bodyParser from "body-parser";  // seems to be deprecated? LOOK for alternative solution.
 //FOUND! https://stackoverflow.com/questions/47232187/express-json-vs-bodyparser-json/47232318
 
+import "dotenv/config.js"
 
 //VARIABLES
 const PORT = 3000;
 
 const app = express();
 
-const APIkey = "";
-
 const networkID = 213;
+
+const API_key = process.env.API_key;
+
+console.log(API_key);
 
 const URL = "https://api.themoviedb.org/3/";
 
-const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${APIkey}`;
+const APIQuery = `discover/tv?sort_by=vote_average.desc&vote_count.gte=50&with_networks=${networkID}&api_key=${API_key}`;
 
 
 
@@ -80,7 +83,7 @@ app.post("/", (req, res) => {
   //we need to use .body to be able to parse through html
   const userQuery = req.body.query;
   
-  const APISearchQuery = `search/tv?api_key=${APIkey}&with_networks=${networkID}&query=${userQuery}`;
+  const APISearchQuery = `search/tv?api_key=${API_key}&with_networks=${networkID}&query=${userQuery}`;
 
   console.log(userQuery);
 
